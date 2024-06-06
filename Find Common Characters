@@ -1,0 +1,23 @@
+import java.util.*;
+class Solution {
+    public List<String> commonChars(String[] words) {
+    List<String> list=new ArrayList<>();        
+        int[] newarray=new int[26];
+        Arrays.fill(newarray,Integer.MAX_VALUE);        
+        for(int i=0;i<words.length;i++){
+            int[] old=new int[26];
+            for(int j=0;j<words[i].length();j++){
+                old[words[i].charAt(j)-'a']++;
+            }       
+            for(char ch='a';ch<='z';ch++)     {
+                newarray[ch-'a']=Math.min(old[ch-'a'],newarray[ch-'a']);
+            }
+        }
+        for(int i=0;i<26;i++){
+            while(newarray[i]--!=0){
+                list.add(Character.toString(i+'a'));
+            }
+        }
+        return list;        
+    }
+}
