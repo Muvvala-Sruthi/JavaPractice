@@ -1,0 +1,58 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {   
+        if(head==null||head.next==null||k==0)            
+        return head;        
+        int n=0;
+        ListNode temp1=head;
+        while(temp1!=null){
+            n++;
+            temp1=temp1.next;
+        }
+        ListNode temptail=head;
+        while(temptail.next!=null){
+            temptail=temptail.next;
+        }
+        k=k%n;
+        if(k==0) return head;
+        temptail.next=head;
+        ListNode temp=head;   
+        int count=0;
+        while(count<n-k-1){
+            count++;
+            temp=temp.next;
+        }
+        head=temp.next;
+        temp.next=null;
+        return head;
+    }
+}
+
+//Neat code
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null || k == 0) {
+            return head;
+        }
+
+        int length = 1;
+        ListNode temp = head;
+
+        while (temp.next != null) {
+            temp = temp.next;
+            length++;
+        }
+
+        temp.next = head;
+        k = k % length;
+        k = length - k;
+
+        while (k-- > 0) {
+            temp = temp.next;
+        }
+
+        head = temp.next;
+        temp.next = null;
+
+        return head;
+    }
+}
