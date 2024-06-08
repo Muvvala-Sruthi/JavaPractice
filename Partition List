@@ -1,0 +1,29 @@
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode before=new ListNode(0);
+        ListNode after=new ListNode(0);
+        ListNode res=before;
+        ListNode res1=after;
+        ListNode temp=head;
+        while(temp!=null){
+            if(temp.val<x){
+                before.next=new ListNode(temp.val);
+                before=before.next;
+            }
+            else{
+                after.next=new ListNode(temp.val);
+                after=after.next;
+            }
+            temp=temp.next;
+        }       
+          after.next=null;          
+        if(res.next!=null&&res1.next==null){
+            return res.next;
+        }
+        if(res1.next!=null&&res.next==null){
+            return res1.next;
+        }
+            before.next=res1.next;
+            return res.next;      
+    }
+}
